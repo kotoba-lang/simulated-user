@@ -14,7 +14,8 @@ execution value, not a prediction about a real person.
 1. A schema is an ordered categorical dependency DAG.
 2. `sample-cohort` lazily samples a bounded cohort from conditional weights.
 3. The host injects `interact`; this library owns no model, network, browser, or
-   app authority.
+   app authority. `simulated-user.murakumo` adapts categorical interaction
+   traces to murakumo.cloud without transferring those authorities to the LLM.
 4. A task is limited to `:product-evaluation` or `:research`, with
    `:decision-impact :none`.
 5. Aggregates require at least five trials. PII dimensions, human-grounded
@@ -49,6 +50,37 @@ execution value, not a prediction about a real person.
    :prompt "Would this fictional user continue?"}
   cohort
   {:variant :b})
+```
+
+## murakumo.cloud evaluation
+
+`simulated-user.murakumo/make-interact` connects the existing `interact`
+boundary to a host-owned Murakumo chat function. Web and app execution remains
+outside the model. The adapter accepts only a bounded categorical trace such
+as `:observe`, `:click`, and `:finish`; raw typed text, screenshots, recordings,
+and identifiers cannot enter the trace.
+
+The JVM host adapter uses Ollama's native `/api/chat` endpoint and requires an
+explicit Murakumo node URL. It has no public-model fallback:
+
+```clojure
+(require '[simulated-user.murakumo :as murakumo]
+         '[simulated-user.murakumo-host :as murakumo-host])
+
+(def interact
+  (murakumo/make-interact
+   (murakumo-host/make-chat
+    {:url (System/getenv "MURAKUMO_LLM_URL")})))
+```
+
+Every accepted response is strict EDN and contains only `:score`, `:choice`,
+and `:reason`. The host receipt records the provider, model, request SHA-256,
+stop reason, and token counts.
+
+Live smoke verification requires a reachable Murakumo fleet node:
+
+```bash
+MURAKUMO_LLM_URL=http://murakumo-node:11434 clojure -M:live
 ```
 
 ## Repository boundary
