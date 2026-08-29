@@ -1,6 +1,6 @@
 (ns simulated-user.murakumo-host
   "JVM host adapter for Murakumo fleet's native Ollama /api/chat endpoint."
-  (:require [clojure.data.json :as json])
+  (:require [json.data-json :as json])
   (:import [java.math BigInteger]
            [java.net URI]
            [java.net.http HttpClient HttpRequest HttpRequest$BodyPublishers
