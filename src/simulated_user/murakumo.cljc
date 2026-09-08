@@ -1,7 +1,7 @@
 (ns simulated-user.murakumo
   (:require #?(:clj [clojure.edn :as edn]
                :cljs [cljs.reader :as edn])
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [simulated-user.interaction :as interaction]))
 
 (def allowed-choices #{:continue :stop :unclear})
