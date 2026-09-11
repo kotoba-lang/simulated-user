@@ -80,7 +80,7 @@ stop reason, and token counts.
 Live smoke verification requires a reachable Murakumo fleet node:
 
 ```bash
-MURAKUMO_LLM_URL=http://murakumo-node:11434 clojure -M:live
+MURAKUMO_LLM_URL=http://murakumo-node:11434 kbb -M:live
 ```
 
 ## Repository boundary
@@ -99,8 +99,8 @@ This repository owns only fictional-cohort product evaluation.
 ## Verification
 
 ```bash
-clojure -M:test
-nbb -cp src:test run-tests.cljk
+kbb -M:test
+kbb --backend sci -cp src:test run-tests.cljk
 ```
 
 ## Sources
