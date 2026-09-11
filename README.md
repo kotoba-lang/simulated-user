@@ -100,7 +100,7 @@ This repository owns only fictional-cohort product evaluation.
 
 ```bash
 clojure -M:test
-nbb -cp src:test run-tests.cljs
+nbb -cp src:test run-tests.cljk
 ```
 
 ## Sources
