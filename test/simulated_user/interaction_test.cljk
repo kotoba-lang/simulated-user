@@ -1,5 +1,5 @@
 (ns simulated-user.interaction-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [simulated-user.interaction :as interaction]))
 
 (def trace

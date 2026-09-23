@@ -1,5 +1,5 @@
 (ns simulated-user.test-runner
-  (:require [clojure.test :as t]
+  (:require [kotoba.test :as t]
             [simulated-user.model-test]
             [simulated-user.eval-test]
             [simulated-user.interaction-test]
