@@ -1,5 +1,5 @@
 (ns simulated-user.murakumo-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [simulated-user.eval :as eval]
             [simulated-user.interaction-test :refer [trace]]
             [simulated-user.model :as model]

@@ -1,5 +1,5 @@
 (ns simulated-user.eval-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [simulated-user.eval :as eval]
             [simulated-user.model :as model]
             [simulated-user.model-test :refer [schema]]))
