@@ -1,5 +1,5 @@
 (ns simulated-user.model
-  (:require [clojure.set :as set]))
+  (:require [kotoba.lang.coll :as set]))
 
 (def ^:private modulus 2147483647)
 (def ^:private multiplier 48271)
