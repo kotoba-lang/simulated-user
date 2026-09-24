@@ -1,11 +1,10 @@
 (ns simulated-user.murakumo-host
   "JVM host adapter for Murakumo fleet's native Ollama /api/chat endpoint."
-  (:require [json.data-json :as json])
+  (:require [kotoba.bytes :as kbytes] [json.data-json :as json])
   (:import [java.math BigInteger]
            [java.net URI]
            [java.net.http HttpClient HttpRequest HttpRequest$BodyPublishers
             HttpResponse$BodyHandlers]
-           [java.nio.charset StandardCharsets]
            [java.security MessageDigest]
            [java.time Duration]))
 
@@ -13,7 +12,7 @@
 
 (defn- sha256 [value]
   (let [digest (.digest (MessageDigest/getInstance "SHA-256")
-                        (.getBytes ^String value StandardCharsets/UTF_8))]
+                        (kbytes/utf8-bytes ^String value))]
     (format "%064x" (BigInteger. 1 digest))))
 
 (defn make-chat
